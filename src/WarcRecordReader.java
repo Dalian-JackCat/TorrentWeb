@@ -92,22 +92,22 @@ public class WarcRecordReader extends RecordReader<LongWritable, WarcRecord> {
             return false;
         }
 
-        while (true){
-            try{
-                if (!value.header.warcTargetUriStr.contains(".torrent") && !value.header.warcTargetUriStr.startsWith("magnet:?"))
-                    value = warcReader.getNextRecord();
-                else if (value == null) {
-                    return false;
-                } else
-                    break;
-            } catch (NullPointerException e){
-                value = warcReader.getNextRecord();
-                if (value == null) {
-                    return false;
-                }
-                continue;
-            }
-        }
+//        while (true){
+//            try{
+//                if (!value.header.warcTargetUriStr.contains(".torrent") && !value.header.warcTargetUriStr.startsWith("magnet:?"))
+//                    value = warcReader.getNextRecord();
+//                else if (value == null) {
+//                    return false;
+//                } else
+//                    break;
+//            } catch (NullPointerException e){
+//                value = warcReader.getNextRecord();
+//                if (value == null) {
+//                    return false;
+//                }
+//                continue;
+//            }
+//        }
 
         return true;
     }
