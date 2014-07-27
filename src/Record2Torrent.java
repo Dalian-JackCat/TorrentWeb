@@ -15,6 +15,7 @@ import java.util.Arrays;
 public class Record2Torrent {
     private String HEXhash = "";
     private String content = "";
+    private final boolean seeder = false;
 
     Record2Torrent(WarcRecord record){
         getTorrentInfo(record);
@@ -26,8 +27,6 @@ public class Record2Torrent {
             String url = record.header.warcTargetUriStr;
             System.out.println(record.header.warcTargetUriStr);
 
-
-
             if (httpHeader == null) {
                 return ;
             } else if(url.contains(".torrent")){
@@ -36,7 +35,7 @@ public class Record2Torrent {
 
                 byte[] b1 = IOUtils.toByteArray(inputStream1);
 
-                Torrent torrent = new Torrent(b1, false);
+                Torrent torrent = new Torrent(b1, seeder);
 
                 HEXhash = torrent.getHexInfoHash();
                 content = new String(b1, "UTF-8");
