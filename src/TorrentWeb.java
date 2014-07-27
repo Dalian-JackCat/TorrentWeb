@@ -15,7 +15,7 @@
  */
 //package nl.surfsara.warcexamples.hadoop.warc;
 
-import nl.surfsara.warcutils.WarcInputFormat;
+//import nl.surfsara.warcutils.WarcInputFormat;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
