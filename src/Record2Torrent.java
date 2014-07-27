@@ -1,3 +1,4 @@
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.jwat.common.HttpHeader;
 import org.jwat.warc.WarcRecord;
@@ -38,7 +39,7 @@ public class Record2Torrent {
                 Torrent torrent = new Torrent(b1);
 
                 HEXhash = torrent.getHexInfoHash();
-                content = new String(b1, "UTF-8");
+                content = new String(Base64.encodeBase64(b1), "US-ASCII");
 
 //                System.out.println("Comment: " + torrent.getComment());
 //                System.out.println("Created by: " + torrent.getCreatedBy());
@@ -80,7 +81,10 @@ public class Record2Torrent {
             InputStream inputStream1 = new FileInputStream(f);
             byte[] b1 = IOUtils.toByteArray(inputStream1);
 
-            //Torrent.
+            b1 = Base64.encodeBase64(b1);
+            String printMe = new String(b1, "US-ASCII");
+
+            System.out.println(printMe);
 
             Torrent torrent = new Torrent(b1);
 
