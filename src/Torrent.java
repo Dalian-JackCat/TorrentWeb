@@ -389,7 +389,7 @@ public class Torrent {
     }
 
     public static byte[] hash(byte[] data) {
-        return DigestUtils.sha1(data);
+        return org.apache.commons.codec.digest.DigestUtils.sha1(data);
     }
 
     /**
