@@ -28,7 +28,7 @@
 		</snapshotRepository>
 	</distributionManagement>-->
 
-	<!--<repositories>
+	<repositories>
 		<repository>
 			<id>HortonWorks</id>
 			<url>http://repo.hortonworks.com/content/repositories/releases/</url>
@@ -39,7 +39,7 @@
 			<url>http://beehub.nl/surfsara-repo/releases/</url>
 			<releases></releases>
 		</repository>
-	</repositories>-->
+	</repositories>
 
 	<dependencies>
 		<dependency>
