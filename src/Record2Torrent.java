@@ -3,9 +3,7 @@ import org.apache.commons.io.IOUtils;
 import org.jwat.common.HttpHeader;
 import org.jwat.warc.WarcRecord;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.Arrays;
 
@@ -105,7 +103,40 @@ public class Record2Torrent {
         }
     }
 
+    public static void testDecode(String file){
+        try{
+            File f = new File(file);
+            //InputStream inputStream1 = new FileInputStream(f);
+
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line1 = br.readLine();
+            String code = line1.split("\\t")[1];
+            System.out.println(code);
+
+            byte[] b1 = Base64.decodeBase64(code);
+
+            Torrent torrent = new Torrent(b1);
+
+            System.out.println("Comment: " + torrent.getComment());
+            System.out.println("Created by: " + torrent.getCreatedBy());
+            List<String> fileList = torrent.getFilenames();
+            System.out.println("File names: ");
+            for(String s : fileList)
+                System.out.println("  " + s);
+            System.out.println("Hex info hash: " + torrent.getHexInfoHash());
+            System.out.println("Name: " + torrent.getName());
+            System.out.println("Size: " + torrent.getSize());
+            System.out.println("Tracker count: " + torrent.getTrackerCount());
+
+
+        } catch (Exception e){
+
+        }
+    }
+
     public static void main(String[] args) {
         Record2Torrent.getTorrentInfo("uTorrent_3.4.2_Build_32354_[FileSick].10566990.TPB.torrent");
+
+        Record2Torrent.testDecode("part-r-00000");
     }
 }
