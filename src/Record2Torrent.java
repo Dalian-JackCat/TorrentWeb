@@ -1,4 +1,3 @@
-import com.turn.ttorrent.common.Torrent;
 import org.apache.commons.io.IOUtils;
 import org.jwat.common.HttpHeader;
 import org.jwat.warc.WarcRecord;
