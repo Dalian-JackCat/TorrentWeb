@@ -101,6 +101,10 @@ public class WarcRecordReader extends RecordReader<LongWritable, WarcRecord> {
                 } else
                     break;
             } catch (NullPointerException e){
+                value = warcReader.getNextRecord();
+                if (value == null) {
+                    return false;
+                }
                 continue;
             }
         }
