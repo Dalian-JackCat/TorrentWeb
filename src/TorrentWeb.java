@@ -41,7 +41,7 @@ public class TorrentWeb extends Configured implements Tool {
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
 		job.setMapperClass(TorrentWebExtracter.class);
-		job.setReducerClass(Reducer.class);
+		job.setReducerClass(TorrentWebReducer.class);
 		job.setInputFormatClass(WarcInputFormat.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);

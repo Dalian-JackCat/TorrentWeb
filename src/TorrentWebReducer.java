@@ -49,9 +49,12 @@ class TorrentWebReducer extends Reducer<Text, Text, Text, Text> {
         while (iterator.hasNext())
         {
             Map.Entry pairs = (Map.Entry)iterator.next();
-            out.append(pairs.getValue() + "\t" + pairs.getKey());
+            System.out.println(pairs.getValue().toString());
+            out.append(pairs.getValue().toString() + "\t" + pairs.getKey());
             out.append("\n");
         }
+
+        //System.out.println(out.toString());
 
         pContext.write(pKey, new Text(out.toString()));
     }
