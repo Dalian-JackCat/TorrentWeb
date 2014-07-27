@@ -12,34 +12,45 @@ class TorrentWebReducer extends Reducer<Text, Text, Text, Text> {
     public void reduce(Text pKey, Iterable<Text> pValues, Context pContext)
             throws IOException, InterruptedException {
 
-        List<String> torrents = new ArrayList<String>();
+        Map<String, Integer> hm = new HashMap<String, Integer>();
+        //String content;
+        int iValue;
         String value;
-        int iter = 0;
-        boolean hasTorrentFile = false;
+
+//        List<String> torrents = new ArrayList<String>();
+//        int iter = 0;
+//        boolean hasTorrentFile = false;
 
         for (Text t : pValues) {
             value = t.toString();
 
-            if (!value.startsWith("magnet:?"))
-            {
-                torrents.add(value);
-                hasTorrentFile = true;
-            } else if(iter < 15){
-                torrents.add(value);
-            }
+            iValue = hm.containsKey(value) ? hm.get(value) : 0;
+            hm.put(value, iValue + 1);
 
-            iter ++;
-
-            if (hasTorrentFile && iter > 10)
-                break;
-
+//            if (!value.startsWith("magnet:?"))
+//            {
+//                torrents.add(value);
+//                hasTorrentFile = true;
+//            } else if(iter < 15){
+//                torrents.add(value);
+//            }
+//
+//            iter ++;
+//
+//            if (hasTorrentFile && iter > 10)
+//                break;
         }
 
+//        System.out.println("num: " + iter);
+
         StringBuilder out = new StringBuilder();
-        for (Object o : torrents)
+        out.append("\n");
+        Iterator iterator = hm.entrySet().iterator();
+        while (iterator.hasNext())
         {
-            out.append(o.toString());
-            out.append("\t");
+            Map.Entry pairs = (Map.Entry)iterator.next();
+            out.append(pairs.getValue() + "\t" + pairs.getKey());
+            out.append("\n");
         }
 
         pContext.write(pKey, new Text(out.toString()));
