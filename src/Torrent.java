@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -29,6 +30,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.security.MessageDigest;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -389,7 +391,14 @@ public class Torrent {
     }
 
     public static byte[] hash(byte[] data) {
-        return org.apache.commons.codec.digest.DigestUtils.sha1(data);
+        try {
+                //return MessageDigest.getInstance(algorithm);
+                MessageDigest md = MessageDigest.getInstance("SHA1");
+                return md.digest(data);
+            } catch (final NoSuchAlgorithmException e) {
+                throw new IllegalArgumentException(e);
+            }
+        //return org.apache.commons.codec.digest.DigestUtils.sha1(data);
     }
 
     /**
