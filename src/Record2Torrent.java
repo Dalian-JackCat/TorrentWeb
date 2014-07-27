@@ -35,7 +35,7 @@ public class Record2Torrent {
 
                 byte[] b1 = IOUtils.toByteArray(inputStream1);
 
-                Torrent torrent = new Torrent(b1, seeder);
+                Torrent torrent = new Torrent(b1);
 
                 HEXhash = torrent.getHexInfoHash();
                 content = new String(b1, "UTF-8");
@@ -82,7 +82,7 @@ public class Record2Torrent {
 
             //Torrent.
 
-            Torrent torrent = new Torrent(b1, false);
+            Torrent torrent = new Torrent(b1);
 
             System.out.println("Comment: " + torrent.getComment());
             System.out.println("Created by: " + torrent.getCreatedBy());
